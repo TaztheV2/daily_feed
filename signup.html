@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Feed Sign Up</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: rgb(120, 96, 64);
+            font-family: Georgia, 'Times New Roman', serif;
+            margin: 0;
+            min-height: 100vh;
+            padding: 18px 12px;
+        }
+
+        #formContainer {
+            background: white;
+            border: 10px solid #063d9b;
+            border-radius: 42px;
+            margin: 0 auto;
+            max-width: 420px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #formContainer::before {
+            background: linear-gradient(#0004, #0004), url('images/jesus_feeds_5000.jpeg') center/cover;
+            content: '';
+            display: block;
+            height: 160px;
+        }
+
+        #formContainer::after {
+            background: linear-gradient(90deg, #252525 20%, #9a825f 20%, #9a825f 21%, #252525 21%, #252525 40%, #9a825f 40%, #9a825f 41%, #252525 41%, #252525 60%, #9a825f 60%, #9a825f 61%, #252525 61%, #252525 80%, #9a825f 80%, #9a825f 81%, #252525 81%);
+            bottom: 0;
+            content: 'OLD TESTAMENT     NEW TESTAMENT     BOOK OF MORMON     DOCTRINE AND COVENANTS     PEARL OF GREAT PRICE';
+            color: #c9a66b;
+            font-size: 10px;
+            height: 100px;
+            left: 0;
+            line-height: 100px;
+            overflow: hidden;
+            position: absolute;
+            text-align: center;
+            white-space: pre;
+            width: 100%;
+        }
+
+        h3 {
+            font-size: 20px;
+            margin: 20px 8px;
+            text-align: center;
+        }
+
+        form {
+            padding: 0 20px 118px;
+        }
+
+        form::before {
+            color: white;
+            content: 'Daily Feed\\A Scripture a Day';
+            font-size: 32px;
+            font-weight: bold;
+            left: 0;
+            line-height: 1.05;
+            position: absolute;
+            text-align: center;
+            text-shadow: 2px 2px 2px #000;
+            top: 78px;
+            white-space: pre;
+            width: 100%;
+        }
+
+        label {
+            display: inline-block;
+            font-size: 16px;
+            margin: 9px 0;
+        }
+
+        input[type='text'], input[type='password'], input[type='email'] {
+            float: right;
+            margin-top: 6px;
+            width: 170px;
+        }
+
+        form > div {
+            text-align: right;
+        }
+
+        section {
+            text-align: center;
+        }
+
+        section label {
+            margin: 8px 0;
+        }
+
+        #closeBtn {
+            left: 15px;
+            position: absolute;
+            top: 12px;
+            z-index: 2;
+        }
+
+        button[type='submit'] {
+            margin: 8px 0;
+        }
+
+        #output {
+            background: white;
+            margin: 18px auto;
+            max-width: 420px;
+            padding: 15px;
+        }
+    </style>
+
+
+
+
+</head>
+
+<body>
+    <div id="formContainer">
+        <h3>Sign Up for Daily Scripture Feed</h3>
+        <form id="myForm">
+            <button type="button" id="closeBtn">X</button>
+            <label for="username">User Name:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label>Gender:</label>
+            <div>
+                <input type="radio" id="male" name="gender" value="male" required>
+                <label for="male">Male</label>
+                <input type="radio" id="female" name="gender" value="female" required>
+                <label for="female">Female</label>
+            </div>
+
+            <section>
+                <input type="checkbox" id="newsletter" name="newsletter">
+                <label for="newsletter">Subscribe to newsletter</label>
+            </section>
+
+            <section>
+                <input type="checkbox" id="conditions" name="conditions" required>
+                <label for="conditions">I acknowledge the terms and conditions</label>
+            </section>
+
+            <section>
+                <button type="submit">Submit</button>
+            </section>
+        </form>
+    </div>
+
+    <div id="output"></div>
+
+    <script>
+        // Here is some Javascript to start looking forward to wdd131
+        document.getElementById("closeBtn").addEventListener("click", function () {
+            document.getElementById("formContainer").style.display = "none";
+         });
+        const form = document.getElementById('myForm');
+        const output = document.getElementById('output');
+
+        form.addEventListener('submit', function (event) {
+            event.preventDefault(); // Stop form from actually submitting
+
+            const formData = new FormData(form);
+            const entries = [];
+
+            for (const [key, value] of formData.entries()) {
+                if (key == "password") {
+                    entries.push(`<strong>${key}</strong>: ${value} (you should probably encrypt the password)`);
+                } else {
+                    entries.push(`<strong>${key}</strong>: ${value}`);
+                }
+            }
+
+            output.innerHTML = `
+            <br>  
+            <h3>Here is the data that would be sent to the server:</h3>
+            <ul>
+                ${entries.map(item => `<li>${item}</li>`).join('')}
+            </ul>
+            `;
+                });
+    </script>
+
+</body>
+
+</html>
