@@ -29,27 +29,30 @@
             position: relative;
         }
 
-        #formContainer::before {
+        .hero {
             background: linear-gradient(#0004, #0004), url('images/jesus_feeds_5000.jpeg') center/cover;
-            content: '';
-            display: block;
             height: 160px;
+            position: relative;
         }
 
-        #formContainer::after {
-            background: linear-gradient(90deg, #252525 20%, #9a825f 20%, #9a825f 21%, #252525 21%, #252525 40%, #9a825f 40%, #9a825f 41%, #252525 41%, #252525 60%, #9a825f 60%, #9a825f 61%, #252525 61%, #252525 80%, #9a825f 80%, #9a825f 81%, #252525 81%);
-            bottom: 0;
-            content: 'OLD TESTAMENT     NEW TESTAMENT     BOOK OF MORMON     DOCTRINE AND COVENANTS     PEARL OF GREAT PRICE';
-            color: #c9a66b;
-            font-size: 10px;
-            height: 100px;
-            left: 0;
-            line-height: 100px;
-            overflow: hidden;
+        .hero h1, .hero p {
+            color: white;
+            margin: 0;
             position: absolute;
             text-align: center;
-            white-space: pre;
+            text-shadow: 2px 2px 2px #000;
             width: 100%;
+        }
+
+        .hero h1 {
+            font-size: 34px;
+            top: 62px;
+        }
+
+        .hero p {
+            font-size: 24px;
+            font-weight: bold;
+            top: 105px;
         }
 
         h3 {
@@ -59,46 +62,55 @@
         }
 
         form {
-            padding: 0 20px 118px;
-        }
-
-        form::before {
-            color: white;
-            content: 'Daily Feed\\A Scripture a Day';
-            font-size: 32px;
-            font-weight: bold;
-            left: 0;
-            line-height: 1.05;
-            position: absolute;
-            text-align: center;
-            text-shadow: 2px 2px 2px #000;
-            top: 78px;
-            white-space: pre;
-            width: 100%;
+            padding: 0 20px 105px;
         }
 
         label {
             display: inline-block;
             font-size: 16px;
-            margin: 9px 0;
         }
 
-        input[type='text'], input[type='password'], input[type='email'] {
-            float: right;
-            margin-top: 6px;
-            width: 170px;
+        .field {
+            align-items: center;
+            display: grid;
+            grid-template-columns: 115px 1fr;
+            gap: 12px;
+            margin: 15px 0;
         }
 
-        form > div {
-            text-align: right;
+        .field input {
+            min-width: 0;
+            padding: 5px;
+            width: 100%;
         }
 
-        section {
+        .gender-row, .check-row, .submit-row {
             text-align: center;
+            margin-top: 18px;
         }
 
-        section label {
-            margin: 8px 0;
+        .gender-row > label:first-child {
+            margin-right: 18px;
+        }
+
+        .check-row label { margin-left: 4px; }
+
+        .books {
+            background: #252525;
+            color: #c9a66b;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            height: 100px;
+        }
+
+        .books div {
+            align-items: center;
+            border-right: 3px solid #c9a66b;
+            display: flex;
+            font-size: 10px;
+            justify-content: center;
+            padding: 5px;
+            text-align: center;
         }
 
         #closeBtn {
@@ -127,40 +139,36 @@
 
 <body>
     <div id="formContainer">
+        <div class="hero">
+            <button type="button" id="closeBtn">X</button>
+            <h1>Daily Feed</h1>
+            <p>Scripture a Day</p>
+        </div>
         <h3>Sign Up for Daily Scripture Feed</h3>
         <form id="myForm">
-            <button type="button" id="closeBtn">X</button>
-            <label for="username">User Name:</label>
-            <input type="text" id="username" name="username" required>
-
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-
-            <label>Gender:</label>
-            <div>
+            <div class="field"><label for="username">User Name:</label><input type="text" id="username" name="username" required></div>
+            <div class="field"><label for="password">Password:</label><input type="password" id="password" name="password" required></div>
+            <div class="field"><label for="email">Email:</label><input type="email" id="email" name="email" required></div>
+            <div class="gender-row">
+                <label>Gender:</label>
                 <input type="radio" id="male" name="gender" value="male" required>
                 <label for="male">Male</label>
                 <input type="radio" id="female" name="gender" value="female" required>
                 <label for="female">Female</label>
             </div>
-
-            <section>
+            <div class="check-row">
                 <input type="checkbox" id="newsletter" name="newsletter">
                 <label for="newsletter">Subscribe to newsletter</label>
-            </section>
-
-            <section>
+            </div>
+            <div class="check-row">
                 <input type="checkbox" id="conditions" name="conditions" required>
                 <label for="conditions">I acknowledge the terms and conditions</label>
-            </section>
-
-            <section>
+            </div>
+            <div class="submit-row">
                 <button type="submit">Submit</button>
-            </section>
+            </div>
         </form>
+        <div class="books"><div>OLD<br>TESTAMENT</div><div>NEW<br>TESTAMENT</div><div>BOOK OF<br>MORMON</div><div>DOCTRINE AND<br>COVENANTS</div><div>PEARL OF<br>GREAT PRICE</div></div>
     </div>
 
     <div id="output"></div>
